@@ -13,8 +13,8 @@ public class Schedule {
     private String todo;
     private String charge;
     private String password;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private String createDate;
+    private String updateDate;
 
     public Schedule(ScheduleRequestDto requestDto) {
         this.todo = requestDto.getTodo();

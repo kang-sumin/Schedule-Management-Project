@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class ScheduleService {
@@ -23,10 +24,13 @@ public class ScheduleService {
 
 
         //지금 현재 시간 데이터 저장
-        LocalDateTime now = LocalDateTime.now();
+        //LocalDateTime now = LocalDateTime.now();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-        schedule.setCreateDate(now);
-        schedule.setUpdateDate(now);
+        String nowstring = format.format(new Date());
+
+        schedule.setCreateDate(nowstring);
+        schedule.setUpdateDate(nowstring);
 
         // DB 저장
         ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);

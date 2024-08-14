@@ -10,8 +10,8 @@ public class ScheduleResponseDto {
     private Long id;
     private String todo;
     private String charge;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private String createDate;
+    private String updateDate;
 
     public ScheduleResponseDto(Schedule schedule) {
         this.id = schedule.getId();

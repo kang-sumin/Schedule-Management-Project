@@ -7,6 +7,8 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ScheduleRepository {
 
@@ -21,6 +23,7 @@ public class ScheduleRepository {
         //DB 저장
         KeyHolder keyHolder = new GeneratedKeyHolder(); // 기본 키를 반환받기 위한 객체
 
+
         String sql = "INSERT INTO schedule (todo, charge, password, createDate, updateDate) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update( con -> {
                     PreparedStatement preparedStatement = con.prepareStatement(sql,
@@ -29,8 +32,8 @@ public class ScheduleRepository {
                     preparedStatement.setString(1, schedule.getTodo());
                     preparedStatement.setString(2, schedule.getCharge());
                     preparedStatement.setString(3, schedule.getPassword());
-                    preparedStatement.setString(4, schedule.getCreateDate().toString());
-                    preparedStatement.setString(5, schedule.getUpdateDate().toString());
+                    preparedStatement.setString(4, schedule.getCreateDate());
+                    preparedStatement.setString(5, schedule.getUpdateDate());
                     return preparedStatement;
                 },
                 keyHolder);
