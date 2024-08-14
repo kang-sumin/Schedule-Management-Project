@@ -7,6 +7,6 @@ public class ScheduleRequestDto {
     private String todo;
     private String charge;
     private String password;
-    private String createDate;
-    private String updateDate;
+//    private String createDate;
+//    private String updateDate;
 }

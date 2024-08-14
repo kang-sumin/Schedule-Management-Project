@@ -4,6 +4,8 @@ import com.sparta.schedule.dto.ScheduleRequestDto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 public class Schedule {
@@ -11,14 +13,14 @@ public class Schedule {
     private String todo;
     private String charge;
     private String password;
-    private String createDate;
-    private String updateDate;
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
 
     public Schedule(ScheduleRequestDto requestDto) {
         this.todo = requestDto.getTodo();
         this.charge = requestDto.getCharge();
         this.password = requestDto.getPassword();
-        this.createDate = requestDto.getCreateDate();
-        this.updateDate = requestDto.getUpdateDate();
+//        this.createDate = requestDto.getCreateDate();
+//        this.updateDate = requestDto.getUpdateDate();
     }
 }
