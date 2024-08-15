@@ -27,14 +27,21 @@ public class ScheduleController {
         return scheduleService.createSchedule(requestDto);
     }
 
-    // 일정 조회
+    // 일정 조회 (단건)
     @GetMapping("/schedules/{id}")
     public List<ScheduleResponseDto> getSchedule(@PathVariable Long id) {
         // 객체간 이동 위해 ScheduleService 객체 생성
         ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
 
         return scheduleService.getSchedule(id);
+    }
 
+    @GetMapping("/schedules")
+    public List<ScheduleResponseDto> getSchedules(@RequestParam(required = false) String updateDate, @RequestParam(required = false) String charge){
+        //객체간 이동 위한 ScheduleService 객체 생성
+        ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
+
+        return scheduleService.getSchedules(updateDate,charge);
     }
 
 }

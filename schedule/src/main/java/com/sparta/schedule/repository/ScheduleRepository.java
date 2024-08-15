@@ -20,7 +20,7 @@ public class ScheduleRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public ScheduleRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate=jdbcTemplate;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     //DB 저장
@@ -30,7 +30,7 @@ public class ScheduleRepository {
 
 
         String sql = "INSERT INTO schedule (todo, charge, password, createDate, updateDate) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update( con -> {
+        jdbcTemplate.update(con -> {
                     PreparedStatement preparedStatement = con.prepareStatement(sql,
                             Statement.RETURN_GENERATED_KEYS);
 
@@ -50,7 +50,7 @@ public class ScheduleRepository {
         return schedule;
     }
 
-
+    // id를 통한 단건 조회
     public List<ScheduleResponseDto> findId(Long id) {
         // DB 에서 ID로 찾아내는 쿼리
         String sql = "SELECT * FROM schedule WHERE id = ?";
@@ -63,8 +63,80 @@ public class ScheduleRepository {
                 String charge = rs.getString("charge");
                 String createDate = rs.getString("createDate");
                 String updateDate = rs.getString("updateDate");
-                return new ScheduleResponseDto(id, todo,charge, createDate,updateDate);
+                return new ScheduleResponseDto(id, todo, charge, createDate, updateDate);
             }
-        },id);
+        }, id);
+    }
+
+    // 수정일과 담당자를 통한 다건 조회
+    // 수정일을 기준으로 내림차순 정렬
+    public List<ScheduleResponseDto> findAll(String updateDate, String charge) {
+        String sql = "";
+
+        if (updateDate != null && charge != null) {
+            sql = "SELECT * FROM schedule WHERE DATE_FORMAT(updateDate, '%Y-%m-%d') = ? AND charge = ? ORDER BY updateDate DESC";
+
+            return jdbcTemplate.query(sql, new RowMapper<ScheduleResponseDto>() {
+                @Override
+                public ScheduleResponseDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    // SQL 의 결과로 받아온 Memo 데이터들을 MemoResponseDto 타입으로 변환해줄 메서드
+                    Long id = rs.getLong("id");
+                    String todo = rs.getString("todo");
+                    String charge = rs.getString("charge");
+                    String createDate = rs.getString("createDate");
+                    String updateDate = rs.getString("updateDate");
+                    return new ScheduleResponseDto(id, todo, charge, createDate, updateDate);
+                }
+            }, updateDate, charge);
+
+        } else if (updateDate == null && charge != null) {
+            sql = "SELECT * FROM schedule WHERE charge = ? ORDER BY updateDate DESC";
+
+            return jdbcTemplate.query(sql, new RowMapper<ScheduleResponseDto>() {
+                @Override
+                public ScheduleResponseDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    // SQL 의 결과로 받아온 Memo 데이터들을 MemoResponseDto 타입으로 변환해줄 메서드
+                    Long id = rs.getLong("id");
+                    String todo = rs.getString("todo");
+                    String charge = rs.getString("charge");
+                    String createDate = rs.getString("createDate");
+                    String updateDate = rs.getString("updateDate");
+                    return new ScheduleResponseDto(id, todo, charge, createDate, updateDate);
+                }
+            }, charge);
+
+        } else if (updateDate != null && charge == null) {
+            sql = "SELECT * FROM schedule WHERE DATE_FORMAT(updateDate, '%Y-%m-%d') = ? ORDER BY updateDate DESC";
+
+            return jdbcTemplate.query(sql, new RowMapper<ScheduleResponseDto>() {
+                @Override
+                public ScheduleResponseDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    // SQL 의 결과로 받아온 Memo 데이터들을 MemoResponseDto 타입으로 변환해줄 메서드
+                    Long id = rs.getLong("id");
+                    String todo = rs.getString("todo");
+                    String charge = rs.getString("charge");
+                    String createDate = rs.getString("createDate");
+                    String updateDate = rs.getString("updateDate");
+                    return new ScheduleResponseDto(id, todo, charge, createDate, updateDate);
+                }
+            }, updateDate);
+
+        } else {
+            sql = "SELECT * FROM schedule ORDER BY updateDate DESC";
+
+            return jdbcTemplate.query(sql, new RowMapper<ScheduleResponseDto>() {
+                @Override
+                public ScheduleResponseDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    // SQL 의 결과로 받아온 Memo 데이터들을 MemoResponseDto 타입으로 변환해줄 메서드
+                    Long id = rs.getLong("id");
+                    String todo = rs.getString("todo");
+                    String charge = rs.getString("charge");
+                    String createDate = rs.getString("createDate");
+                    String updateDate = rs.getString("updateDate");
+                    return new ScheduleResponseDto(id, todo, charge, createDate, updateDate);
+                }
+            });
+
+        }
     }
 }

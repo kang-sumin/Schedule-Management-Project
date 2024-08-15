@@ -43,7 +43,7 @@ public class ScheduleService {
         return scheduleResponseDto;
     }
 
-
+    // id를 통한 단건조회
     public List<ScheduleResponseDto> getSchedule(Long id) {
         // DB 조회
         ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
@@ -51,4 +51,11 @@ public class ScheduleService {
         return scheduleRepository.findId(id);
     }
 
+    // 수정일과 담당자를 통한 다건조회
+    public List<ScheduleResponseDto> getSchedules(String updateDate, String charge) {
+        // DB 조회
+       ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
+
+        return  scheduleRepository.findAll(updateDate, charge);
+    }
 }
