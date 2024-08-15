@@ -150,10 +150,14 @@ public class ScheduleRepository {
 
     }
 
+    // 일정 삭제
+    public void delete(Long id) {
+        String sql = "DELETE FROM schedule WHERE id = ?";
+        jdbcTemplate.update(sql,id);
+    }
 
     public Schedule findById(Long id, String password) {
         String sql = "SELECT * FROM schedule WHERE id = ?";
-        //resultSet.next()
 
         return jdbcTemplate.query(sql, resultSet -> {
 
@@ -173,6 +177,5 @@ public class ScheduleRepository {
             }
         }, id);
     }
-
 
 }

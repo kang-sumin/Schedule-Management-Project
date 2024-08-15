@@ -75,4 +75,20 @@ public class ScheduleService {
             throw new IllegalArgumentException("선택하신 일정은 존재하지 않습니다.");
         }
     }
+
+    public Long deleteSchedule(Long id, ScheduleRequestDto scheduleRequestDto) {
+        // DB 삭제
+        ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
+
+        String password = scheduleRequestDto.getPassword();
+
+        Schedule schedule = scheduleRepository.findById(id, password);
+        if(schedule != null){
+            scheduleRepository.delete(id);
+
+            return id;
+        }else{
+            throw new IllegalArgumentException("선택하신 일정은 존재하지 않습니다.");
+        }
+    }
 }

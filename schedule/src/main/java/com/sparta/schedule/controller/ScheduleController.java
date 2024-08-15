@@ -54,4 +54,13 @@ public class ScheduleController {
         return scheduleService.updateSchedule(id, scheduleRequestDto);
     }
 
+    // 일정 삭제
+    @DeleteMapping("/schedules")
+    public Long deleteSchedule(@RequestParam Long id, @RequestBody ScheduleRequestDto scheduleRequestDto){
+        //객체간 이동 위한 ScheduleService 객체 생성
+        ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
+
+        return scheduleService.deleteSchedule(id, scheduleRequestDto);
+    }
+
 }
