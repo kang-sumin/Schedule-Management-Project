@@ -7,7 +7,6 @@ import com.sparta.schedule.repository.ScheduleRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -43,10 +42,10 @@ public class ScheduleService {
         return scheduleResponseDto;
     }
 
-//    public List<ScheduleResponseDto> getSchedules() {
-//        // DB 조회
-//        ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
-//
-//        return scheduleRepository.find();
-//    }
+    public List<ScheduleResponseDto> getSchedule(Long id) {
+        // DB 조회
+        ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
+
+        return scheduleRepository.findId(id);
+    }
 }
