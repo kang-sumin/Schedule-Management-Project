@@ -58,28 +58,28 @@
 ---
 
 ### **Class Diagram**
-
-[##_Image|kage@x5sGh/btsI5BCw5gP/zCurGkDoai3bANgA3qe5o0/img.png|CDM|1.3|{"originWidth":3378,"originHeight":1664,"style":"alignCenter"}_##]
+![SchedulManagementClassDiagram](https://github.com/user-attachments/assets/17828219-8421-43ed-8a9a-1db99d1d272b)
 
 ---
 
 ### **API 명세서**
 
-[https://documenter.getpostman.com/view/37567342/2sA3s7iUQn](https://documenter.getpostman.com/view/37567342/2sA3s7iUQn)
+이미지 또는 아래 글을 클릭하시면 API 명세서 문서 링크로 이동합니다.
+</br></br>
+[API 명세서 보러가기](https://documenter.getpostman.com/view/37567342/2sA3s7iUQn)
+</br></br>
+[![API 명세서](https://github.com/user-attachments/assets/5d44f8db-7164-4bf0-8853-965e2c597da0)](https://documenter.getpostman.com/view/37567342/2sA3s7iUQn)
 
-[Schedule Management API document
 
-The Postman Documenter generates and maintains beautiful, live documentation for your collections. Never worry about maintaining API documentation again.
+![screencapture-documenter-getpostman-view-37567342-2sA3s7iUQn-2024-08-15-23_28_33](https://github.com/user-attachments/assets/3e38d6b8-4e0b-4eb7-9ee0-78da3d16717a)
 
-documenter.getpostman.com](https://documenter.getpostman.com/view/37567342/2sA3s7iUQn)
-
-[##_Image|kage@cvpXXx/btsI4bymn85/JcKxh8HMfkEcVg7cRoKJyK/img.png|CDM|1.3|{"originWidth":1920,"originHeight":5018,"style":"alignCenter"}_##]
 
 ---
 
 ### **ERD**
 
-[##_Image|kage@rrRhX/btsI5cwu06t/acZ48dKcyFSq5KLt7mDUe1/img.png|CDM|1.3|{"originWidth":866,"originHeight":495,"style":"alignCenter","filename":"Blank diagram - Page 1.png"}_##]
+![Blank diagram - Page 1](https://github.com/user-attachments/assets/fa8e833b-c50a-4011-bc74-6f33126f17a9)
+
 
 ---
 
