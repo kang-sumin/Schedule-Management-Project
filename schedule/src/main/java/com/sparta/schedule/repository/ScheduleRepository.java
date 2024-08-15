@@ -1,14 +1,19 @@
 package com.sparta.schedule.repository;
 
+import com.sparta.schedule.dto.ScheduleResponseDto;
 import com.sparta.schedule.entity.Schedule;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class ScheduleRepository {
 
@@ -46,4 +51,20 @@ public class ScheduleRepository {
     }
 
 
+    public List<ScheduleResponseDto> findId(Long id) {
+        // DB 에서 ID로 찾아내는 쿼리
+        String sql = "SELECT * FROM schedule WHERE id = ?";
+        return jdbcTemplate.query(sql, new RowMapper<ScheduleResponseDto>() {
+            @Override
+            public ScheduleResponseDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+                // SQL 의 결과로 받아온 Memo 데이터들을 MemoResponseDto 타입으로 변환해줄 메서드
+                Long id = rs.getLong("id");
+                String todo = rs.getString("todo");
+                String charge = rs.getString("charge");
+                String createDate = rs.getString("createDate");
+                String updateDate = rs.getString("updateDate");
+                return new ScheduleResponseDto(id, todo,charge, createDate,updateDate);
+            }
+        },id);
+    }
 }

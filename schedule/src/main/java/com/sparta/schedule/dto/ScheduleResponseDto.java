@@ -20,4 +20,12 @@ public class ScheduleResponseDto {
         this.createDate = schedule.getCreateDate();
         this.updateDate = schedule.getUpdateDate();
     }
+
+    public ScheduleResponseDto(Long id, String todo, String charge, String createDate, String updateDate) {
+        this.id = id;
+        this.todo = todo;
+        this.charge = charge;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
 }

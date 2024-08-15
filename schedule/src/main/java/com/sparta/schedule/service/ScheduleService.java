@@ -43,10 +43,12 @@ public class ScheduleService {
         return scheduleResponseDto;
     }
 
-//    public List<ScheduleResponseDto> getSchedules() {
-//        // DB 조회
-//        ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
-//
-//        return scheduleRepository.find();
-//    }
+
+    public List<ScheduleResponseDto> getSchedule(Long id) {
+        // DB 조회
+        ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
+
+        return scheduleRepository.findId(id);
+    }
+
 }
