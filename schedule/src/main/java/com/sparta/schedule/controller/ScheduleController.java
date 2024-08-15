@@ -36,12 +36,22 @@ public class ScheduleController {
         return scheduleService.getSchedule(id);
     }
 
+    // 일정 조회 (다건)
     @GetMapping("/schedules")
     public List<ScheduleResponseDto> getSchedules(@RequestParam(required = false) String updateDate, @RequestParam(required = false) String charge){
         //객체간 이동 위한 ScheduleService 객체 생성
         ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
 
         return scheduleService.getSchedules(updateDate,charge);
+    }
+
+    // 일정 수정
+    @PutMapping("/schedules")
+    public Long updateSchedule(@RequestParam Long id,@RequestBody ScheduleRequestDto scheduleRequestDto){
+        //객체간 이동 위한 ScheduleService 객체 생성
+        ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
+
+        return scheduleService.updateSchedule(id, scheduleRequestDto);
     }
 
 }

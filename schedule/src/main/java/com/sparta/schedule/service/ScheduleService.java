@@ -58,4 +58,21 @@ public class ScheduleService {
 
         return  scheduleRepository.findAll(updateDate, charge);
     }
+
+    // 일정 수정
+    public Long updateSchedule(Long id,ScheduleRequestDto scheduleRequestDto) {
+        // DB 수정
+        ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
+
+        String password = scheduleRequestDto.getPassword();
+
+        Schedule schedule = scheduleRepository.findById(id, password);
+        if(schedule != null){
+            scheduleRepository.update(id, scheduleRequestDto);
+
+            return id;
+        }else{
+            throw new IllegalArgumentException("선택하신 일정은 존재하지 않습니다.");
+        }
+    }
 }

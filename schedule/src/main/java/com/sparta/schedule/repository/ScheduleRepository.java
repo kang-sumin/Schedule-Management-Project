@@ -1,5 +1,6 @@
 package com.sparta.schedule.repository;
 
+import com.sparta.schedule.dto.ScheduleRequestDto;
 import com.sparta.schedule.dto.ScheduleResponseDto;
 import com.sparta.schedule.entity.Schedule;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -139,4 +140,39 @@ public class ScheduleRepository {
 
         }
     }
+
+    public void update(Long id, ScheduleRequestDto scheduleRequestDto) {
+        String sql = "UPDATE schedule SET todo = ?, charge = ?, updateDate = ? WHERE id = ?";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String nowstring = format.format(new Date());
+        jdbcTemplate.update(sql, scheduleRequestDto.getTodo(), scheduleRequestDto.getCharge(), nowstring, id);
+
+
+    }
+
+
+    public Schedule findById(Long id, String password) {
+        String sql = "SELECT * FROM schedule WHERE id = ?";
+        //resultSet.next()
+
+        return jdbcTemplate.query(sql, resultSet -> {
+
+            if (resultSet.next()) {
+                Schedule schedule = new Schedule();
+                if(password.equals(resultSet.getString("password"))){
+                    schedule.setTodo(resultSet.getString("todo"));
+                    schedule.setCharge(resultSet.getString("charge"));
+                    schedule.setCreateDate(resultSet.getString("createDate"));
+                    schedule.setUpdateDate(resultSet.getString("updateDate"));
+                }else{
+                    throw new IllegalArgumentException("비밀번호가 일치하기 않습니다.");
+                }
+                return schedule;
+            } else {
+                return null;
+            }
+        }, id);
+    }
+
+
 }
