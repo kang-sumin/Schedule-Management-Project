@@ -28,13 +28,13 @@ public class ScheduleController {
     }
 
     // 일정 조회
-    @GetMapping("/schedules/{id}")
-    public List<ScheduleResponseDto> getSchedule(@PathVariable Long id) {
-        // 객체간 이동 위해 ScheduleService 객체 생성
-        ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
-
-        return scheduleService.getSchedule(id);
-
-    }
+//    @GetMapping("/schedules")
+//    public List<ScheduleResponseDto> getSchedules() {
+//        // 객체간 이동 위해 ScheduleService 객체 생성
+//        ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
+//
+//        return scheduleService.getSchedules();
+//
+//    }
 
 }
