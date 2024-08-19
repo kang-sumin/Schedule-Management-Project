@@ -106,7 +106,7 @@ public class ScheduleRepository {
                 }
             }, charge);
 
-        } else if (updateDate != null && charge == null) {
+        } else if (updateDate != null) {
             sql = "SELECT * FROM schedule WHERE DATE_FORMAT(updateDate, '%Y-%m-%d') = ? ORDER BY updateDate DESC";
 
             return jdbcTemplate.query(sql, new RowMapper<ScheduleResponseDto>() {
